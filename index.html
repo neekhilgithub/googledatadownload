@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Data Downloader</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .example-text {
+            font-size: smaller;
+            font-style: italic;
+            opacity: 0.5;
+        }
+        .loading-img {
+            display: none;
+        }
+        .success-message {
+            display: none;
+            text-align: center;
+            color: white; /* Text color */
+            background-color: #28a745; /* Background color */
+            padding: 20px; /* Padding */
+            border-radius: 5px; /* Rounded corners */
+        }
+        .success-message a {
+            color: #fff; /* Link color */
+            text-decoration: none; /* Remove underline */
+            font-weight: bold; /* Bold text */
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <h1>Welcome to the Google Data Downloader!</h1>
+        </div>
+    </header>
+    <div class="container mt-4">
+        <form id="downloadForm" action="/download" method="post">
+            <div class="form-group">
+                <label for="basemap">Choose a Google Basemap:</label>
+                <select class="form-control" name="basemap" id="basemap">
+                    <option value="ROADMAP">Roadmap</option>
+                    <option value="TERRAIN">Terrain</option>
+                    <option value="SATELLITE">Satellite</option>
+                    <option value="HYBRID">Hybrid</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="bbox">Enter Bounding Box:</label>
+                <span class="example-text">(xmin, ymin, xmax, ymax) Example: -122.75, 36.8, -121.75, 38.2</span>
+                <input type="text" class="form-control" name="bbox" id="bbox" required pattern="-?[\d.]+, -?[\d.]+, -?[\d.]+, -?[\d.]+" title="Please enter bounding box coordinates in the format: xmin, ymin, xmax, ymax">
+            </div>
+            <div class="form-group">
+                <label for="filename">Enter Output Filename:</label>
+                <input type="text" class="form-control" name="filename" id="filename">
+            </div>
+            <button type="submit" class="btn btn-primary">Download</button>
+        </form>
+        <div id="loading" class="loading-img text-center">
+            <p class="mt-2">Downloading...</p>
+        </div>
+        <div id="success" class="success-message">
+            <p>Download successful! <a href="/" class="btn btn-light">Go back</a></p>
+        </div>
+    </div>
+    <footer class="bg-dark text-white py-4 mt-4">
+        <div class="container text-center">
+            <p>© 2024 Neekhil</p>
+        </div>
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
